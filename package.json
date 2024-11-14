@@ -1,0 +1,24 @@
+{
+  "name": "bsky-scrape",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "scrape bluesky for atlas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@atcute/client": "^2.0.4",
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@skyware/firehose": "^0.3.2",
+    "@skyware/jetstream": "^0.2.0",
+    "apache-arrow": "^18.0.0",
+    "duckdb-async": "^1.1.1"
+  }
+}

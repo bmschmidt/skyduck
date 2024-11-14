@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "nodenext",
+    "target": "ESNext",               // Sets the JavaScript language version for emitted JavaScript and includes compatible library declarations
+    "module": "NodeNext",
+    "strict": true,                    // Enables strict type-checking options
+    "esModuleInterop": true,           // Ensures compatibility with CommonJS and ES Modules
+    "skipLibCheck": true,              // Skips type checking of all declaration files (*.d.ts)
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",                  // Specifies the output folder for the compiled files
+    "rootDir": "src"                   // Specifies the root folder for TypeScript files
+  },
+  "include": ["src"],                  // Specifies the folder to compile
+  "exclude": ["node_modules"]          // Excludes dependencies from compilation
+}
