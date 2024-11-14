@@ -76,7 +76,10 @@ setInterval(async () => {
     if (!filehandles.has(collectionName)) {
       filehandles.set(
         collectionName,
-        await fs.open(`./${collectionName.split('.').join('_')}.jsonl`, 'w')
+        await fs.open(
+          `./collections/${collectionName.split('.').join('_')}.jsonl`,
+          'w'
+        )
       );
     }
     const filehandle = filehandles.get(collectionName)!;
