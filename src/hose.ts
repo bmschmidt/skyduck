@@ -8,6 +8,8 @@ import {
   CommitUpdate,
   Jetstream,
 } from '@skyware/jetstream';
+
+import { promises as fs } from 'fs';
 import {
   Data,
   Field,
@@ -60,21 +62,27 @@ const dbPromise = Database.create('test');
 //   createdAt: new Timestamp(1),
 // };
 
+const filehandles = new Map<string, fs.FileHandle>();
+
 setInterval(async () => {
   // Most important thing is batches.
   const db = await dbPromise;
   for (const [k, v] of Object.entries(queue['create'])) {
-    console.log({ k, v });
     const coll = v;
     if (coll.length === 0) {
       continue;
     }
     const collectionName = coll[0].commit.collection;
-    if (collectionName === 'app.bsky.feed.post') {
-      console.log('collection: ', coll[0]);
-      const recc = coll.map((d) => {
-        console.log(JSON.stringify(d) + '\n');
-      });
+    if (!filehandles.has(collectionName)) {
+      filehandles.set(
+        collectionName,
+        await fs.open(`./${collectionName.split('.').join('_')}.jsonl`, 'w')
+      );
+    }
+    const filehandle = filehandles.get(collectionName)!;
+    for (const commit of coll) {
+      const str = JSON.stringify(commit.commit.record) + '\n';
+      await filehandle.write(str);
     }
   }
 }, 500);
